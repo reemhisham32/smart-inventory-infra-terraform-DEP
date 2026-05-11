@@ -49,7 +49,7 @@ terraform {
 # VPC Module
 module "vpc" {
   source = "./modules/vpc"
-  
+
   project_name         = var.project_name
   environment          = var.environment
   vpc_cidr             = var.vpc_cidr
@@ -66,11 +66,11 @@ module "vpc" {
 # IAM Module
 module "iam" {
   source = "./modules/iam"
-  
+
   project_name = var.project_name
   environment  = var.environment
   tags         = var.tags
-  
+
   # Pass through the additional IAM users/roles
   additional_iam_users = var.additional_iam_users
   additional_iam_roles = var.additional_iam_roles
@@ -79,7 +79,7 @@ module "iam" {
 # Security Groups Module
 module "security_groups" {
   source = "./modules/security-groups"
-  
+
   project_name    = var.project_name
   environment     = var.environment
   vpc_id          = module.vpc.vpc_id
@@ -91,7 +91,7 @@ module "security_groups" {
 # EKS Module
 module "eks" {
   source = "./modules/eks"
-  
+
   project_name              = var.project_name
   environment               = var.environment
   cluster_version           = var.cluster_version
@@ -138,7 +138,7 @@ resource "kubernetes_config_map_v1_data" "aws_auth" {
       # Additional IAM roles from variables
       var.additional_iam_roles
     ))
-    
+
     # Additional IAM users from variables
     mapUsers = yamlencode(var.additional_iam_users)
   }
