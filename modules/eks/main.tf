@@ -105,7 +105,7 @@ resource "aws_eks_node_group" "main" {
   tags = merge(
     var.tags,
     {
-      Name = "${var.project_name}-${var.environment}-node-group-${count.index + 1}"
+      Name                                                                   = "${var.project_name}-${var.environment}-node-group-${count.index + 1}"
       "kubernetes.io/cluster/${var.project_name}-${var.environment}-cluster" = "owned"
     }
   )
